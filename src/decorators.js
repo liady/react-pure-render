@@ -13,3 +13,37 @@ export function pureClass(Component) {
 
   Component.prototype.shouldComponentUpdate = shouldPureComponentUpdate;
 }
+
+export function pureMethod(target, name, descriptor) {
+  let lastProps = undefined;
+  let lastState = undefined;
+
+  let savedResult = undefined;
+  let savedException = undefined;
+
+  const oldValue = descriptor.value;
+  descriptor.value = function () {
+    // shouldPureComponentUpdate is symmetric, so can re-use it here.
+    if (shouldPureComponentUpdate.call(this, lastProps, lastState)) {
+      lastProps = this.props;
+      lastState = this.state;
+
+      savedResult = undefined;
+      savedException = undefined;
+
+      try {
+        savedResult = oldValue.apply(this, arguments);
+      } catch(e) {
+        savedException = e;
+      }
+    }
+
+    if (savedException !== undefined) {
+      throw(savedException);
+    }
+
+    return savedResult;
+  };
+
+  return descriptor;
+}
