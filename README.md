@@ -1,10 +1,18 @@
 # react-pure-render
 
+[![NPM Version](http://img.shields.io/npm/v/react-pure-render.svg)](https://www.npmjs.org/package/react-pure-render)
+
 A function, a component and a mixin for React pure rendering.
 
 This module provides *exactly* the same functionality as [PureRenderMixin](https://facebook.github.io/react/docs/pure-render-mixin.html), but as a standalone module and in three different flavors.
 
 ### Usage
+
+#### Installing
+
+```sh
+npm install react-pure-render
+```
 
 #### Function
 
