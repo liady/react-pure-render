@@ -21,7 +21,7 @@ This is my preferred method, but it requires ES7 [class property transform](http
 ```js
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-export default class Button {
+export default class Button extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() { }
