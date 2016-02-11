@@ -15,11 +15,8 @@ export function pureClass(Component) {
 }
 
 export function pureMethod(target, name, descriptor) {
-  let lastProps = undefined;
-  let lastState = undefined;
-
-  let savedResult = undefined;
-  let savedException = undefined;
+  let lastProps, lastState,
+      savedResult, savedException;
 
   const oldValue = descriptor.value;
   descriptor.value = function () {
@@ -39,7 +36,7 @@ export function pureMethod(target, name, descriptor) {
     }
 
     if (savedException !== undefined) {
-      throw(savedException);
+      throw savedException;
     }
 
     return savedResult;

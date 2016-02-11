@@ -2,11 +2,8 @@ import shallowEqual from './shallowEqual';
 
 export default function pureStateless(statelessComponent) {
 
-    let lastProps = undefined;
-    let lastContext = undefined;
-
-    let savedResult = undefined;
-    let savedException = undefined;
+    let lastProps, lastContext,
+        savedResult, savedException;
 
     return function (props, context) {
         let shouldUpdate = !shallowEqual(props, lastProps) || !shallowEqual(context, lastContext);
@@ -26,9 +23,9 @@ export default function pureStateless(statelessComponent) {
         }
 
         if (savedException !== undefined) {
-          throw (savedException);
+          throw savedException;
         }
 
         return savedResult;
-    }
+    };
 }
